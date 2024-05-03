@@ -1710,7 +1710,7 @@ insert into Payments_Accounting(
 						select  	A.REC_ID,
 									A.REC_DETAIL_ID,
 								   'Receipts' as 'Form_Flag',
-								   case when A.Amount<0 then 5552 else 5551 end as GL_FLAG,
+								   case when A.Amount<0 then 5551 else 5552 end as GL_FLAG,
 								   ABS(A.Amount) as Amount,
 								   A.GL_ACC_ID,
 								   A.FORM_DATE,
