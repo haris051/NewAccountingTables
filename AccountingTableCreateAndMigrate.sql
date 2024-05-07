@@ -1444,6 +1444,37 @@ insert into Payments_Accounting(
 				            on          A.PAY_DETAIL_ID = B.ID
 				            where       A.GL_FLAG in ('23') 
                             and         B.FORM_FLAG = 'L';
+
+insert into Payments_Accounting(
+                                    FORM_ID,
+                                    Form_Detail_Id,
+                                    FORM_FLAG,
+                                    GL_FLAG,
+                                    Amount,
+                                    GL_ACC_ID,
+                                    FORM_DATE,
+                                    FORM_REFERENCE,
+                                    COMPANY_ID,
+                                    IS_CONFLICTED,
+                                    RECONCILE_DATE
+                                )
+
+							select      A.Pay_ID,
+									    A.Pay_DETAIL_ID,
+								           'Payments' as 'Form_Flag',
+									    case when A.Amount<0 then 5554 else 5553 end as GL_FLAG,,
+									    ABS(A.Amount),
+									    A.GL_ACC_ID,
+									    A.FORM_DATE,
+									    A.FORM_REFERENCE,
+									    A.COMPANY_ID,
+									    A.IS_CONFLICTED,
+									    A.RECONCILE_DATE
+                            from        payments_account_detail as A 
+				            inner join	payments_detail as B 
+				            on          A.PAY_DETAIL_ID = B.ID
+				            where       A.GL_FLAG in ('23') 
+                            and         B.FORM_FLAG = 'I';
 		
 /*Vendor Payments*/
 
