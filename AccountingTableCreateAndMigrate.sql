@@ -1462,7 +1462,7 @@ insert into Payments_Accounting(
 							select      A.Pay_ID,
 									    A.Pay_DETAIL_ID,
 								           'Payments' as 'Form_Flag',
-									    case when A.Amount<0 then 5554 else 5553 end as GL_FLAG,,
+									    case when A.Amount<0 then 5554 else 5553 end as GL_FLAG,
 									    ABS(A.Amount),
 									    A.GL_ACC_ID,
 									    A.FORM_DATE,
