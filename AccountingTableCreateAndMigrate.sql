@@ -1474,7 +1474,7 @@ insert into Payments_Accounting(
 				            inner join	payments_detail as B 
 				            on          A.PAY_DETAIL_ID = B.ID
 				            where       A.GL_FLAG in ('23') 
-                            and         B.FORM_FLAG = 'I';
+                            and         B.FORM_FLAG = 'T';
 		
 /*Vendor Payments*/
 
