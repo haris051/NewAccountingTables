@@ -43,7 +43,7 @@ insert into Stock_Accounting(
 							IS_CONFLICTED,
 							RECONCILE_DATE  
 				    from    stock_in_account_detail
-                    where   GL_FLAG in ('62','64');
+                    		    where   GL_FLAG in ('62','64');
 
 /*Stock In*/
 
@@ -73,17 +73,17 @@ insert into
 insert into 
 			Stock_accounting
 								select 
-										0    as id							,
-										A.id as Form_Id				  		,
-										B.id as Form_Detail_Id				,
-										'StockTransfer' as Form_Flag		,
-										58 as GL_FLAG						,
-										ABS(B.Amount) as Form_Amount		,
-										B.GL_ACC_ID							,
-										A.ENTRY_DATE as Form_Date			,
-										A.ST_ENTRY_DATE as FORM_REFERENCE	,
-										A.COMPANY_FROM_ID					,
-										'N' as IS_CONFLICTED				,
+										0    as id,
+										A.id as Form_Id	,
+										B.id as Form_Detail_Id,
+										'StockTransfer' as Form_Flag,
+										58 as GL_FLAG,
+										ABS(B.Amount) as Form_Amount,
+										B.GL_ACC_ID,
+										A.ENTRY_DATE as Form_Date,
+										A.ST_ENTRY_DATE as FORM_REFERENCE,
+										A.COMPANY_FROM_ID,
+										'N' as IS_CONFLICTED,
 										'1999-01-01 00:00:00' as  Reconcile_Date
 								from 
 											Stock_Transfer A 
@@ -94,17 +94,17 @@ insert into
 insert into 
 			Stock_accounting
 								select 
-										0    as id							,
-										A.id as Form_Id				  		,
-										B.id as Form_Detail_Id				,
-										'StockTransfer' as Form_Flag		,
-										59 as GL_FLAG						,
-										ABS(B.Amount_OUT) as Form_Amount	,
-										B.COS_ACC_ID						,
-										A.ENTRY_DATE as Form_Date			,
-										A.ST_ENTRY_DATE as FORM_REFERENCE	,
-										A.COMPANY_FROM_ID					,
-										'N' as IS_CONFLICTED				,
+										0    as id,
+										A.id as Form_Id	,
+										B.id as Form_Detail_Id,
+										'StockTransfer' as Form_Flag,
+										59 as GL_FLAG,
+										ABS(B.Amount_OUT) as Form_Amount,
+										B.COS_ACC_ID,
+										A.ENTRY_DATE as Form_Date,
+										A.ST_ENTRY_DATE as FORM_REFERENCE,
+										A.COMPANY_FROM_ID,
+										'N' as IS_CONFLICTED,
 										'1999-01-01 00:00:00' as  Reconcile_Date
 								from 
 											Stock_Transfer A 
@@ -116,17 +116,17 @@ insert into
 insert into 
 			Stock_accounting
 								select 
-										0    as id							,
-										A.id as Form_Id				  		,
-										B.id as Form_Detail_Id				,
-										'StockTransfer' as Form_Flag		,
-										60 as GL_FLAG						,
-										ABS(B.Amount_OUT) as Form_Amount	,
-										B.INV_ACC_ID						,
-										A.ENTRY_DATE as Form_Date			,
-										A.ST_ENTRY_DATE as FORM_REFERENCE	,
-										A.COMPANY_FROM_ID					,
-										'N' as IS_CONFLICTED				,
+										0    as id,
+										A.id as Form_Id,
+										B.id as Form_Detail_Id,
+										'StockTransfer' as Form_Flag,
+										60 as GL_FLAG,
+										ABS(B.Amount_OUT) as Form_Amount,
+										B.INV_ACC_ID,
+										A.ENTRY_DATE as Form_Date,
+										A.ST_ENTRY_DATE as FORM_REFERENCE,
+										A.COMPANY_FROM_ID,
+										'N' as IS_CONFLICTED,
 										'1999-01-01 00:00:00' as  Reconcile_Date
 								from 
 											Stock_Transfer A 
@@ -137,17 +137,17 @@ insert into
 insert into 
 			Stock_accounting
 								select 
-										0    as id								,
-										A.id as Form_Id				  			,
-										null as Form_Detail_Id					,
-										'StockTransfer' as Form_Flag			,
-									    150 as GL_FLAG							,
-										ABS(A.FREIGHT_CHARGES) as Form_Amount	,
-										A.Freight_ACC_Id						,
-										A.ENTRY_DATE as Form_Date				,
-										A.ST_ENTRY_DATE as FORM_REFERENCE		,
-										A.COMPANY_FROM_ID						,
-										'N' as IS_CONFLICTED					,
+										0    as id,
+										A.id as Form_Id,
+										null as Form_Detail_Id,
+										'StockTransfer' as Form_Flag,
+									         150 as GL_FLAG,
+										ABS(A.FREIGHT_CHARGES) as Form_Amount,
+										A.Freight_ACC_Id,
+										A.ENTRY_DATE as Form_Date,
+										A.ST_ENTRY_DATE as FORM_REFERENCE,
+										A.COMPANY_FROM_ID,
+										'N' as IS_CONFLICTED,
 										'1999-01-01 00:00:00' as  Reconcile_Date
 								from 
 											Stock_Transfer A;
@@ -155,17 +155,17 @@ insert into
 insert into 
 			Stock_accounting
 								select 
-										0    as id									,
-										A.id as Form_Id				  				,
-										null as Form_Detail_Id						,
-										'StockTransfer' as Form_Flag				,
-										151 as GL_FLAG								,
-										ABS(A.CUSTOM_CHARGES) as Form_Amount		,
-										A.CUS_ACC_ID								,
-										A.ENTRY_DATE as Form_Date					,
-										A.ST_ENTRY_DATE as FORM_REFERENCE			,
-										A.COMPANY_FROM_ID							,
-										'N' as IS_CONFLICTED						,
+										0    as id,
+										A.id as Form_Id,
+										null as Form_Detail_Id,
+										'StockTransfer' as Form_Flag,
+										151 as GL_FLAG,
+										ABS(A.CUSTOM_CHARGES) as Form_Amount,
+										A.CUS_ACC_ID,
+										A.ENTRY_DATE as Form_Date,
+										A.ST_ENTRY_DATE as FORM_REFERENCE,
+										A.COMPANY_FROM_ID,
+										'N' as IS_CONFLICTED,
 										'1999-01-01 00:00:00' as  Reconcile_Date
 								from 
 											Stock_Transfer A;
@@ -208,7 +208,7 @@ insert into Repair_Accounting(
 							    FORM_FLAG
                              )       
 
-       	                select    A.REPAIR_IN_ID,
+       	                			    select    A.REPAIR_IN_ID,
 							      A.ID,
 							      75 as GL_FLAG, 
 							      ABS(A.AMOUNT +A.REPAIR_CHARGES) as Amount, 
@@ -217,9 +217,9 @@ insert into Repair_Accounting(
 							      B.PAYPAL_TRANSACTION_ID, 
 							      B.COMPANY_ID,
 							      'RepairIn' 
-				       from       repair_in_detail as A 
-                       inner join repair_in as B 
-                       on         A.REPAIR_IN_ID=B.ID;
+				       		   from       repair_in_detail as A 
+                       				   inner join repair_in as B 
+                       				   on         A.REPAIR_IN_ID=B.ID;
        
        
 insert into Repair_Accounting(
@@ -237,7 +237,7 @@ insert into Repair_Accounting(
                             )       
 
 				     select 
-                                A.REPAIR_IN_ID,
+                                			    A.REPAIR_IN_ID,
 							    A.ID,
 							    76 as GL_FLAG,     
 							    ABS(A.AMOUNT) as Amount, 
@@ -247,8 +247,8 @@ insert into Repair_Accounting(
 							    B.COMPANY_ID,
 							    'RepairIn' 
 				     from       repair_in_detail as A 
-                     inner join	repair_in as B 
-				  	 on         A.REPAIR_IN_ID=B.ID;
+                     		     inner join	repair_in as B 
+				     on         A.REPAIR_IN_ID=B.ID;
        
 insert into Repair_Accounting(
                                   FORM_ID,
@@ -271,9 +271,9 @@ insert into Repair_Accounting(
 							        B.PAYPAL_TRANSACTION_ID, 
 							        B.COMPANY_ID,
 							        'RepairIn' 
-				        from        repair_in_detail as A 
-                        inner join  repair_in as B 
-                        on          A.REPAIR_IN_ID=B.ID;
+				        	from        repair_in_detail as A 
+                        			inner join  repair_in as B 
+                        			on          A.REPAIR_IN_ID=B.ID;
        
 insert into Repair_Accounting(
         
@@ -288,20 +288,21 @@ insert into Repair_Accounting(
         
                              )       
 
-						select    A.ID,
-                                  B.id,
+						select    
+							      A.ID,
+                                  			      B.id,
 							      75 as GL_FLAG,
-							      C.AMOUNT as Amount ,
+							      ABS(C.AMOUNT) as Amount ,
 							      B.INV_ACC_ID,
 							      A.RN_ENTRY_DATE,
 							      A.PAYPAL_TRANSACTION_ID,
 							      A.COMPANY_ID,
 							      'RepairIn' 
-                        from 
+                       			        from 
 							       repair_in as A 
-				        inner join repair_in_detail as B 
+				        	inner join repair_in_detail as B 
 						on         A.id=B.REPAIR_IN_ID 
-                        inner join repair_in_detail_parts_inv_junction as C 
+                        			inner join repair_in_detail_parts_inv_junction as C 
 						on         B.id =C.REPAIR_IN_DETAIL_ID;
 
 insert into Repair_Accounting(
@@ -316,20 +317,22 @@ insert into Repair_Accounting(
                                   FORM_FLAG
                              )       
 
-						select     A.ID,
+						select     
+							       A.ID,
 							       B.id,
 							      '78' as GL_FLAG,
-							       C.AMOUNT as Amount,
+							       ABS(C.AMOUNT) as Amount,
 							       C.PARTS_ACC_ID,
 							       A.RN_ENTRY_DATE,
 							       A.PAYPAL_TRANSACTION_ID,
 							       A.COMPANY_ID,
 							       'RepairIn' 
-				        from       repair_in as A 
-						inner join repair_in_detail as B 
-				        on         A.id=B.REPAIR_IN_ID 
-						inner join repair_in_detail_parts_inv_junction as C 
-						on         B.id =C.REPAIR_IN_DETAIL_ID;
+				        	from       
+								repair_in as A 
+						inner join 	repair_in_detail as B 
+				        	on         	A.id=B.REPAIR_IN_ID 
+						inner join 	repair_in_detail_parts_inv_junction as C 
+						on         	B.id =C.REPAIR_IN_DETAIL_ID;
 /*Repair In*/
 
 /*Repair Out*/
@@ -345,7 +348,8 @@ insert into Repair_Accounting(
                                   FORM_FLAG
                              )
 							  
-						select    A.REPAIR_Out_ID,
+						select    
+							     A.REPAIR_Out_ID,
 							      A.ID,
 							      73 as GL_FLAG, 
 							      ABS(A.AMOUNT) as Amount, 
@@ -354,9 +358,11 @@ insert into Repair_Accounting(
 							      B.PAYPAL_TRANSACTION_ID, 
 							      B.COMPANY_ID,
 							      'RepairOut' 
-				        from       repair_Out_detail as A 
-						inner join repair_Out as B 
-                        on         A.Repair_out_id=B.ID;
+				        	from       	   
+							     repair_Out_detail as A 
+						inner join 
+							     repair_Out as B 
+                        			on           A.Repair_out_id=B.ID;
        
 insert into Repair_Accounting(
                                   FORM_ID,
@@ -370,7 +376,8 @@ insert into Repair_Accounting(
                                   FORM_FLAG
                             )       
 
-						select      A.REPAIR_Out_ID,
+						select      
+								A.REPAIR_Out_ID,
 							        A.ID,
 							        74 as GL_FLAG, 
 							        ABS(A.AMOUNT) as Amount, 
@@ -379,9 +386,9 @@ insert into Repair_Accounting(
 							        B.PAYPAL_TRANSACTION_ID, 
 							        B.COMPANY_ID,
 							        'RepairOut' 
-				        from        repair_Out_detail as A 
-				        inner join  repair_Out as B 
-				        on          A.Repair_out_id=B.ID;
+				        	from        	repair_Out_detail as A 
+				        	inner join  	repair_Out as B 
+				        	on          	A.Repair_out_id=B.ID;
 
 /*Repair Out*/
 
@@ -429,7 +436,7 @@ insert into
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
 									A.COMPANY_ID,
 									'N' as IS_CONFLICTED,
-									 '1999-01-01 00:00:00' as  Reconcile_Date
+									'1999-01-01 00:00:00' as  Reconcile_Date
 							  from 
 										Replacement A
 							  inner join 
@@ -442,37 +449,37 @@ insert into
 insert into 
 			Sales_accounting
 							select 
-									0    as id					 			 ,
-									A.id as Form_Id		  		 			 ,
-									B.id as Form_Detail_Id		 			 ,
-								'Replacement' as Form_Flag		 			 ,
-									'50' as GL_FLAG				 			 ,
-									ABS(A.SALES_TAX) as Amount	 			 ,
-									A.AR_ACC_ID as GL_ACC_ID	 			 ,
-									A.REP_ENTRY_DATE as Form_Date			 ,
+									0    as id,
+									A.id as Form_Id,
+									B.id as Form_Detail_Id,
+								       'Replacement' as Form_Flag,
+									'50' as GL_FLAG,
+									ABS(A.SALES_TAX) as Amount,
+									A.AR_ACC_ID as GL_ACC_ID,
+									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
 									A.COMPANY_ID,
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join      Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										A.SALES_TAX < 0
+									A.SALES_TAX < 0
 							AND 
-										B.IS_Return = 'Y';
+									B.IS_Return = 'Y';
 
 
 insert into 
 			Sales_accounting
 								select 
 										0    as id,
-										A.id as Form_Id		  	,
-										B.id as Form_Detail_Id	,
-									'Replacement' as Form_Flag	,
-										49 as GL_FLAG			,
+										A.id as Form_Id,
+										B.id as Form_Detail_Id,
+										'Replacement' as Form_Flag,
+										49 as GL_FLAG,
 										ABS(B.Amount) as Amount ,
 										B.GL_ACC_ID as GL_ACC_ID,
 										A.REP_ENTRY_DATE as Form_Date,
@@ -481,22 +488,22 @@ insert into
 										'N' as IS_CONFLICTED,
 										'1999-01-01 00:00:00' as  Reconcile_Date
 								from 
-											Replacement A 
-								inner join  Replacement_Detail B 
+										Replacement A 
+								inner join  	Replacement_Detail B 
 								on 
-											A.id= B.Replacement_Id
+										A.id= B.Replacement_Id
 								where 
-											B.IS_RETURN = 'Y';
+										B.IS_RETURN = 'Y';
                 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  	,
+									A.id as Form_Id,
 									B.id as Form_Detail_Id	,
-								'Replacement' as Form_Flag	,
-									51 as GL_FLAG			,
-									ABS(B.Amount_OUT) as Amount		,
+									'Replacement' as Form_Flag,
+									51 as GL_FLAG,
+									ABS(B.Amount_OUT) as Amount,
 									B.COS_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -504,23 +511,23 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join      Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'Y';
+									B.IS_RETURN = 'Y';
 
 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  	,
+									A.id as Form_Id	,
 									B.id as Form_Detail_Id	,
-								'Replacement' as Form_Flag	,
-									52 as GL_FLAG			,
-									ABS(B.Amount_OUT) as Amount		,
+									'Replacement' as Form_Flag,
+									52 as GL_FLAG,
+									ABS(B.Amount_OUT) as Amount,
 									B.INV_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -528,21 +535,21 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'Y';
+									B.IS_RETURN = 'Y';
 										
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  	,
-									B.id as Form_Detail_Id	,
-								'Replacement' as Form_Flag	,
-									'100' as GL_FLAG			,
+									A.id as Form_Id,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									'100' as GL_FLAG,
 									ABS(A.SALES_TAX) as Amount,
 									A.TAX_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
@@ -551,14 +558,14 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										A.SALES_TAX < 0 
+									A.SALES_TAX < 0 
 							AND 
-										B.IS_RETURN = 'Y';
+									B.IS_RETURN = 'Y';
 
 
 /*Replacement Issue*/
@@ -579,23 +586,23 @@ insert into
 									'N' as IS_CONFLICTED,
 									 '1999-01-01 00:00:00' as  Reconcile_Date
 							  from 
-										Replacement A
+									Replacement A
 							  inner join 
-										Replacement_Detail B 
+									Replacement_Detail B 
 							  ON 
-										A.id = B.REPLACEMENT_ID
+									A.id = B.REPLACEMENT_ID
 							  where
-										B.IS_Return = 'N'; 
+									B.IS_Return = 'N'; 
                 
                 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  	,
-									B.id as Form_Detail_Id	,
-									'Replacement' as Form_Flag	,
-								    '53'  as GL_FLAG			,
+									A.id as Form_Id,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+								    	'53'  as GL_FLAG,
 									ABS(A.SALES_TAX) as Amount,
 									A.AR_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
@@ -604,25 +611,25 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										A.Sales_Tax > 0
+									A.Sales_Tax > 0
 							AND 
-										B.IS_Return = 'N';
+									B.IS_Return = 'N';
 										
                 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									'53' as GL_FLAG			,
-									ABS(A.FREIGHT_CHARGES) as Amount		,
+									A.id as Form_Id	,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									'53' as GL_FLAG	,
+									ABS(A.FREIGHT_CHARGES) as Amount,
 									A.Freight_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -630,22 +637,22 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
 
 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									53 as GL_FLAG				,
+									A.id as Form_Id	,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									53 as GL_FLAG,
 									ABS(A.MISCELLANEOUS_CHARGES) as Amount,
 									A.MISCELLANEOUS_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
@@ -654,22 +661,22 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									54 as GL_FLAG				,
-									ABS(B.Amount) as Amount		,
+									A.id as Form_Id,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									54 as GL_FLAG,
+									ABS(B.Amount) as Amount,
 									B.GL_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -677,23 +684,23 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join      Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
 
 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									55 as GL_FLAG				,
-									ABS(B.Amount_OUT) as Amount		,
+									A.id as Form_Id	,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									55 as GL_FLAG,
+									ABS(B.Amount_OUT) as Amount,
 									B.COS_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -701,22 +708,22 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
                 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									56 as GL_FLAG				,
-									ABS(B.Amount_Out) as Amount		,
+									A.id as Form_Id	,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									56 as GL_FLAG,
+									ABS(B.Amount_Out) as Amount,
 									B.INV_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -724,23 +731,23 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
 
 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									86 as GL_FLAG				,
-									ABS(A.FREIGHT_CHARGES) as Amount		,
+									A.id as Form_Id,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									86 as GL_FLAG,
+									ABS(A.FREIGHT_CHARGES) as Amount,
 									A.Freight_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -748,22 +755,22 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
 
 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									87 as GL_FLAG				,
+									A.id as Form_Id	,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									87 as GL_FLAG,
 									ABS(A.MISCELLANEOUS_CHARGES) as Amount,
 									A.MISCELLANEOUS_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
@@ -772,21 +779,21 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
                 
 insert into 
 			Sales_accounting
 							select 
 									0    as id,
-									A.id as Form_Id		  		,
-									B.id as Form_Detail_Id		,
-									'Replacement' as Form_Flag	,
-									'85' as GL_FLAG				,
+									A.id as Form_Id,
+									B.id as Form_Detail_Id,
+									'Replacement' as Form_Flag,
+									'85' as GL_FLAG	,
 									ABS(A.SALES_TAX) as Amount,
 									A.TAX_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
@@ -795,14 +802,14 @@ insert into
 									'N' as IS_CONFLICTED,
 									'1999-01-01 00:00:00' as  Reconcile_Date
 							from 
-										Replacement A 
-							inner join  Replacement_Detail B 
+									Replacement A 
+							inner join  	Replacement_Detail B 
 							on 
-										A.id= B.Replacement_Id
+									A.id= B.Replacement_Id
 							where 
-										A.SALES_TAX > 0 
+									A.SALES_TAX > 0 
 							AND 
-										B.IS_RETURN = 'N';
+									B.IS_RETURN = 'N';
                 
 
 
@@ -826,16 +833,17 @@ insert into Sales_Accounting(
                                  RECONCILE_DATE
                            )
 
-						select SI_ID					   ,
-							   SI_DETAIL_ID				   ,
+						select 
+							   SI_ID,
+							   SI_DETAIL_ID,
 							   'Saleinvoice' as 'Form_Flag',
-							   GL_FLAG					   ,
-							   ABS(Amount) as Amount	   ,
-							   GL_ACC_ID				   ,
-							   FORM_DATE				   ,
-							   FORM_REFERENCE			   ,
-							   COMPANY_ID				   ,
-							   IS_CONFLICTED			   ,
+							   GL_FLAG,
+							   ABS(Amount) as Amount,
+							   GL_ACC_ID,
+							   FORM_DATE,
+							   FORM_REFERENCE,
+							   COMPANY_ID,
+							   IS_CONFLICTED,
 							   RECONCILE_DATE 
 				        from   sale_invoice_account_detail 
 				        where  GL_FLAG in ('41','42','43','44','79','80','81');
@@ -856,16 +864,17 @@ insert into Sales_Accounting(
                                  RECONCILE_DATE
                             )
 
-						select Sr_ID						,
-							   Sr_DETAIL_ID					,
-							   'Salereturn' as 'Form_Flag'  ,
-							   GL_FLAG						,
-							   ABS(Amount) as Amount		,
-							   GL_ACC_ID					,
-							   FORM_DATE					,
-							   FORM_REFERENCE				,
-							   COMPANY_ID					,
-							   IS_CONFLICTED				,
+						select 
+							   Sr_ID,
+							   Sr_DETAIL_ID,
+							   'Salereturn' as 'Form_Flag',
+							   GL_FLAG,
+							   ABS(Amount) as 'Amount',
+							   GL_ACC_ID,
+							   FORM_DATE,
+							   FORM_REFERENCE,
+							   COMPANY_ID,
+							   IS_CONFLICTED,
 							   RECONCILE_DATE  
 				        from   sale_return_account_detail 
 				        where  GL_FLAG in ('46','45','47','48','82','83','84');
@@ -918,10 +927,10 @@ insert into purchase_accounting
 insert into purchase_accounting
 				select 
 						0    as id,
-						A.id as Form_Id		  	,
-						B.id as Form_Detail_Id	,
-						'ReceiveOrder' as Form_Flag	,
-						37 as GL_FLAG			,
+						A.id as Form_Id,
+						B.id as Form_Detail_Id,
+						'ReceiveOrder' as Form_Flag,
+						37 as GL_FLAG,
 						ABS(B.Amount),
 						B.GL_ACC_ID,
 						A.RECEIVE_ENTRY_DATE as Form_Date,
@@ -986,16 +995,17 @@ insert into Purchase_Accounting(
                                     RECONCILE_DATE
                                )
 						
-						select PC_ID						 ,
-							   PC_DETAIL_ID					 ,
+						select 
+							   PC_ID,
+							   PC_DETAIL_ID,
 							   'PartialCredit' as 'Form_Flag',
-							   GL_FLAG						 ,
-							   ABS(Amount) as Amount		 ,
-							   GL_ACC_ID					 ,
-							   FORM_DATE					 ,
-							   FORM_REFERENCE				 ,
-							   COMPANY_ID					 ,
-							   IS_CONFLICTED				 ,
+							   GL_FLAG,
+							   ABS(Amount) as Amount,
+							   GL_ACC_ID,
+							   FORM_DATE,
+							   FORM_REFERENCE,
+							   COMPANY_ID,
+							   IS_CONFLICTED,
 							   RECONCILE_DATE  
 				        from   partial_credit_account_detail 
                         where  GL_FLAG in ('31','32','33','34');
@@ -1039,16 +1049,17 @@ insert into Adjustment_Accounting(
                                       RECONCILE_DATE
                                  )
 
-							select AJ_ID						,
-							       AJ_DETAIL_ID					,
-								   'Adjustment' as 'Form_Flag'	,
-								   GL_FLAG						,
-								   ABS(Amount) as Amount		,
-								   GL_ACC_ID					,
-								   FORM_DATE					,
-								   FORM_REFERENCE				,
-								   COMPANY_ID					,
-								   IS_CONFLICTED				,
+							select 
+								  AJ_ID,
+							          AJ_DETAIL_ID,
+								   'Adjustment' as 'Form_Flag',
+								   GL_FLAG,
+								   ABS(Amount) as Amount,
+								   GL_ACC_ID,
+								   FORM_DATE,
+								   FORM_REFERENCE,
+								   COMPANY_ID,
+								   IS_CONFLICTED,
 								   RECONCILE_DATE 
 				            from   adjustment_account_detail
 				            where  GL_FLAG in ('65','66','67','68','69','70');
