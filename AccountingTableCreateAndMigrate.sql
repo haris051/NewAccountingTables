@@ -308,6 +308,7 @@ insert into Repair_Accounting(
 insert into Repair_Accounting(
                                   FORM_ID,
                                   Form_Detail_Id,
+				  RN_PARTS_JUNCTION_ID,
                                   GL_FLAG,
                                   Amount,
                                   GL_ACC_ID,
@@ -320,6 +321,7 @@ insert into Repair_Accounting(
 						select     
 							       A.ID,
 							       B.id,
+							       C.id,
 							      '78' as GL_FLAG,
 							       ABS(C.AMOUNT) as Amount,
 							       C.PARTS_ACC_ID,
