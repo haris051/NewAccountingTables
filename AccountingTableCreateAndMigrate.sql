@@ -14,7 +14,8 @@ create table Stock_Accounting(
                                   Form_Reference varchar(50),
                                   Company_id int,
                                   Is_Conflicted char(1),
-                                  Reconcile_date datetime
+                                  Reconcile_date datetime,
+				  UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
                              );
 /*Stock In*/
 insert into Stock_Accounting(
@@ -192,7 +193,9 @@ create table Repair_Accounting(
 							    Form_Reference varchar(50),
 							    Company_id int,
 							    Is_Conflicted char(1),
-							    Reconcile_date datetime
+							    Reconcile_date datetime,
+         		                                    Unique key (FORM_ID,FORM_DETAIL_ID,RN_PARTS_JUNCTION_ID,GL_FLAG)
+
                              );
 
 /*Repair In*/       
@@ -208,18 +211,22 @@ insert into Repair_Accounting(
 							    FORM_FLAG
                              )       
 
-       	                			    select    A.REPAIR_IN_ID,
-							      A.ID,
+						select    						  
+							      A.REPAIR_IN_ID as FORM_Id,
+							      A.ID as FORM_DETAIL_ID,
 							      75 as GL_FLAG, 
-							      ABS(A.AMOUNT +A.REPAIR_CHARGES) as Amount, 
+							      ABS(A.AMOUNT + A.REPAIR_CHARGES + SUM(IFNULL(C.Amount,0))) as Amount, 
 							      A.INV_ACC_ID, 
 							      B.RN_ENTRY_DATE, 
 							      B.PAYPAL_TRANSACTION_ID, 
 							      B.COMPANY_ID,
 							      'RepairIn' 
-				       		   from       repair_in_detail as A 
-                       				   inner join repair_in as B 
-                       				   on         A.REPAIR_IN_ID=B.ID;
+						from       repair_in_detail as A 
+						inner join repair_in as B 
+						on         A.REPAIR_IN_ID=B.ID
+						LEFT join  repair_in_detail_parts_inv_junction as C 
+	       				        on         A.id =C.REPAIR_IN_DETAIL_ID
+	                        		group by   A.REPAIR_IN_ID,A.ID,A.INV_ACC_ID,B.RN_ENTRY_DATE,B.PAYPAL_TRANSACTION_ID,B.COMPANY_ID;	
        
        
 insert into Repair_Accounting(
@@ -275,36 +282,6 @@ insert into Repair_Accounting(
                         			inner join  repair_in as B 
                         			on          A.REPAIR_IN_ID=B.ID;
        
-insert into Repair_Accounting(
-        
-                                  FORM_ID,Form_Detail_Id,
-                                  GL_FLAG,
-                                  Amount,
-                                  GL_ACC_ID,
-                                  FORM_DATE,
-                                  FORM_REFERENCE,
-                                  COMPANY_ID,
-                                  FORM_FLAG
-        
-                             )       
-
-						select    
-							      A.ID,
-                                  			      B.id,
-							      75 as GL_FLAG,
-							      ABS(C.AMOUNT) as Amount ,
-							      B.INV_ACC_ID,
-							      A.RN_ENTRY_DATE,
-							      A.PAYPAL_TRANSACTION_ID,
-							      A.COMPANY_ID,
-							      'RepairIn' 
-                       			        from 
-							       repair_in as A 
-				        	inner join repair_in_detail as B 
-						on         A.id=B.REPAIR_IN_ID 
-                        			inner join repair_in_detail_parts_inv_junction as C 
-						on         B.id =C.REPAIR_IN_DETAIL_ID;
-
 insert into Repair_Accounting(
                                   FORM_ID,
                                   Form_Detail_Id,
@@ -413,7 +390,9 @@ create table Sales_Accounting(
                                   Form_Reference varchar(50),
                                   Company_id int,
                                   Is_Conflicted char(1),
-                                  Reconcile_date datetime
+                                  Reconcile_date datetime,
+                                  Unique KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
+
                              );
 
 
@@ -432,7 +411,7 @@ insert into
 									 null as Form_Detail_Id,
 									'Replacement' as Form_Flag,
 									'50' as GL_FLAG,
-									ABS(B.Amount) as Amount,
+									ABS(B.Amount + case when A.Sales_TAX < 0 then ABS(A.SALES_TAX) else 0 end) as Amount,
 									A.AR_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -448,30 +427,6 @@ insert into
 							  where
 										B.IS_Return = 'Y'; 
 										
-insert into 
-			Sales_accounting
-							select 
-									0    as id,
-									A.id as Form_Id,
-									B.id as Form_Detail_Id,
-								       'Replacement' as Form_Flag,
-									'50' as GL_FLAG,
-									ABS(A.SALES_TAX) as Amount,
-									A.AR_ACC_ID as GL_ACC_ID,
-									A.REP_ENTRY_DATE as Form_Date,
-									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
-									A.COMPANY_ID,
-									'N' as IS_CONFLICTED,
-									'1999-01-01 00:00:00' as  Reconcile_Date
-							from 
-									Replacement A 
-							inner join      Replacement_Detail B 
-							on 
-									A.id= B.Replacement_Id
-							where 
-									A.SALES_TAX < 0
-							AND 
-									B.IS_Return = 'Y';
 
 
 insert into 
@@ -580,7 +535,7 @@ insert into
 									null as Form_Detail_Id,
 									'Replacement' as Form_Flag,
 									'53' as GL_FLAG,
-									ABS(B.Amount) as Amount,
+									ABS(B.Amount + case when A.SALES_TAX > 0 then A.SALES_TAX ELSE 0 END + A.FREIGHT_CHARGES + A.MISCELLANEOUS_CHARGES) as Amount,
 									A.AR_ACC_ID as GL_ACC_ID,
 									A.REP_ENTRY_DATE as Form_Date,
 									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
@@ -596,80 +551,6 @@ insert into
 							  where
 									B.IS_Return = 'N'; 
                 
-                
-insert into 
-			Sales_accounting
-							select 
-									0    as id,
-									A.id as Form_Id,
-									B.id as Form_Detail_Id,
-									'Replacement' as Form_Flag,
-								    	'53'  as GL_FLAG,
-									ABS(A.SALES_TAX) as Amount,
-									A.AR_ACC_ID as GL_ACC_ID,
-									A.REP_ENTRY_DATE as Form_Date,
-									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
-									A.COMPANY_ID,
-									'N' as IS_CONFLICTED,
-									'1999-01-01 00:00:00' as  Reconcile_Date
-							from 
-									Replacement A 
-							inner join  	Replacement_Detail B 
-							on 
-									A.id= B.Replacement_Id
-							where 
-									A.Sales_Tax > 0
-							AND 
-									B.IS_Return = 'N';
-										
-                
-insert into 
-			Sales_accounting
-							select 
-									0    as id,
-									A.id as Form_Id	,
-									B.id as Form_Detail_Id,
-									'Replacement' as Form_Flag,
-									'53' as GL_FLAG	,
-									ABS(A.FREIGHT_CHARGES) as Amount,
-									A.Freight_ACC_ID as GL_ACC_ID,
-									A.REP_ENTRY_DATE as Form_Date,
-									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
-									A.COMPANY_ID,
-									'N' as IS_CONFLICTED,
-									'1999-01-01 00:00:00' as  Reconcile_Date
-							from 
-									Replacement A 
-							inner join  	Replacement_Detail B 
-							on 
-									A.id= B.Replacement_Id
-							where 
-									B.IS_RETURN = 'N';
-
-
-insert into 
-			Sales_accounting
-							select 
-									0    as id,
-									A.id as Form_Id	,
-									B.id as Form_Detail_Id,
-									'Replacement' as Form_Flag,
-									53 as GL_FLAG,
-									ABS(A.MISCELLANEOUS_CHARGES) as Amount,
-									A.MISCELLANEOUS_ACC_ID as GL_ACC_ID,
-									A.REP_ENTRY_DATE as Form_Date,
-									A.PAYPAL_TRANSACTION_ID as FORM_REFERENCE,
-									A.COMPANY_ID,
-									'N' as IS_CONFLICTED,
-									'1999-01-01 00:00:00' as  Reconcile_Date
-							from 
-									Replacement A 
-							inner join  	Replacement_Detail B 
-							on 
-									A.id= B.Replacement_Id
-							where 
-									B.IS_RETURN = 'N';
-
 insert into 
 			Sales_accounting
 							select 
@@ -900,7 +781,8 @@ create table Purchase_Accounting(
 								    Form_Reference varchar(50),
 								    Company_id int,
 								    Is_Conflicted char(1),
-								    Reconcile_date datetime
+								    Reconcile_date datetime,
+								    UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
                                 );
 
 
@@ -1031,7 +913,8 @@ create table Adjustment_Accounting(
                                        Form_Reference varchar(50),
                                        Company_id int,
                                        Is_Conflicted char(1),
-                                       Reconcile_date datetime
+                                       Reconcile_date datetime,
+				       UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
                                  );
 
 /*Inventory Adjustment*/
@@ -1114,7 +997,8 @@ create table Payments_Accounting(
                                      Form_Reference varchar(50),
                                      Company_id int,
                                      Is_Conflicted char(1),
-                                     Reconcile_date datetime
+                                     Reconcile_date datetime,
+				     UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
                                 );
 
 /*Receive Money*/
