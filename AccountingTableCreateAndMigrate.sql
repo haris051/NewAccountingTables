@@ -1,21 +1,24 @@
 /*Charges Section is Pending*/
 
 /********Stock Accounting**********/
-drop table if exists Stock_Accounting;
+drop table if Exists Stock_Accounting;
 create table Stock_Accounting(
                                   Id int Not Null primary key auto_increment ,
-                                  Form_Id int,
-                                  Form_Detail_Id int,
-                                  Form_Flag Varchar(50),
-                                  GL_FLAG int,
-                                  Amount double,
-                                  GL_ACC_ID int,
-                                  Form_Date datetime,
-                                  Form_Reference varchar(50),
-                                  Company_id int,
-                                  Is_Conflicted char(1),
-                                  Reconcile_date datetime,
-				  UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
+                                  Form_Id int NOT NULL,
+                                  Form_Detail_Id int NULL,
+                                  Form_Flag Varchar(50) NOT NULL,
+                                  GL_FLAG int NOT NULL,
+                                  Amount decimal(22,2) NOT NULL ,
+                                  GL_ACC_ID int NOT NULL,
+                                  Form_Date datetime NOT NULL,
+                                  Form_Reference varchar(50) DEFAULT NULL,
+                                  Company_id int NOT NULL,
+                                  Is_Conflicted char(1) NOT NULL DEFAULT 'N',
+                                  Reconcile_date datetime NOT NULL DEFAULT '1999-01-01 00:00:00',
+				  UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG),
+                                  UNIQUE KEY `Sales_Accounting_PK` (`ID`),
+                                  KEY `Form_Detail_Id_Key` (`Form_DETAIL_ID`),
+                                  KEY `FORM_ID_KEY` (`FORM_ID`)
                              );
 /*Stock In*/
 insert into Stock_Accounting(
@@ -182,20 +185,22 @@ insert into
 drop table if exists Repair_Accounting;
 create table Repair_Accounting(
                                 Id int Not Null primary key auto_increment,
-							    Form_Id int,
-                                Form_Detail_Id int,
-							    RN_PARTS_JUNCTION_ID int,
-							    Form_Flag Varchar(50),
-							    GL_FLAG int,
-							    Amount double,
-							    GL_ACC_ID int,
-							    Form_Date datetime,
-							    Form_Reference varchar(50),
-							    Company_id int,
-							    Is_Conflicted char(1),
-							    Reconcile_date datetime,
-         		                                    Unique key (FORM_ID,FORM_DETAIL_ID,RN_PARTS_JUNCTION_ID,GL_FLAG)
-
+							    Form_Id int NOT NULL,
+                                Form_Detail_Id int NULL,
+							    RN_PARTS_JUNCTION_ID int default NUll,
+							    Form_Flag Varchar(50) NOT NULL,
+							    GL_FLAG int NOT NULL,
+							    Amount decimal(22,2) NOT NULL,
+							    GL_ACC_ID int NOT NULL,
+							    Form_Date datetime NOT NULL,
+							    Form_Reference varchar(50) DEFAULT NULL,
+							    Company_id int NOT NULL,
+							    Is_Conflicted char(1) NOT NULL DEFAULT 'N',
+							    Reconcile_date datetime NOT NULL DEFAULT '1999-01-01 00:00:00',
+							    Unique key (FORM_ID,FORM_DETAIL_ID,RN_PARTS_JUNCTION_ID,GL_FLAG),
+							    UNIQUE KEY `Repair_Accounting_PK` (`ID`),
+							    KEY `Form_Detail_Id_Key` (`Form_DETAIL_ID`),
+							    KEY `FORM_ID_KEY` (`FORM_ID`)
                              );
 
 /*Repair In*/       
@@ -380,19 +385,21 @@ insert into Repair_Accounting(
 drop table if exists Sales_Accounting;
 create table Sales_Accounting(
                                   Id int Not Null primary key auto_increment,
-                                  Form_Id int,
-                                  Form_Detail_Id int,
-                                  Form_Flag Varchar(50),
-                                  GL_FLAG int,
-                                  Amount double,
-                                  GL_ACC_ID int,
-                                  Form_Date datetime,
-                                  Form_Reference varchar(50),
-                                  Company_id int,
-                                  Is_Conflicted char(1),
-                                  Reconcile_date datetime,
-                                  Unique KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
-
+                                  Form_Id int NOT NULL,
+                                  Form_Detail_Id int NULL,
+                                  Form_Flag Varchar(50) NOT NULL,
+                                  GL_FLAG int NOT NULL,
+                                  Amount decimal(22,2) NOT NULL,
+                                  GL_ACC_ID int NOT NULL,
+                                  Form_Date datetime NOT NULL,
+                                  Form_Reference varchar(50) DEFAULT NULL,
+                                  Company_id int NOT NULL,
+                                  Is_Conflicted char(1) NOT NULL DEFAULT 'N',
+                                  Reconcile_date datetime NOT NULL DEFAULT '1999-01-01 00:00:00',
+                                  Unique KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG),
+				  UNIQUE KEY `Sales_Accounting_PK` (`ID`),
+				  KEY `Form_Detail_Id_Key` (`Form_DETAIL_ID`),
+				  KEY `FORM_ID_KEY` (`FORM_ID`)
                              );
 
 
@@ -770,19 +777,22 @@ insert into Sales_Accounting(
 
 drop table if exists Purchase_Accounting;
 create table Purchase_Accounting(
-                                    Id int Not Null primary key auto_increment,
-								    Form_Id int,
-								    Form_Detail_Id int,
-								    Form_Flag Varchar(50),
-								    GL_FLAG int,
-								    Amount double,
-								    GL_ACC_ID int,
-								    Form_Date datetime,
-								    Form_Reference varchar(50),
-								    Company_id int,
-								    Is_Conflicted char(1),
-								    Reconcile_date datetime,
-								    UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
+                                   				   Id int Not Null primary key auto_increment,
+								    Form_Id int NOT NULL,
+								    Form_Detail_Id int NULL,
+								    Form_Flag Varchar(50) NOT NULL,
+								    GL_FLAG int NOT NULL,
+								    Amount decimal(22,2) NOT NULL,
+								    GL_ACC_ID int NOT NULL,
+								    Form_Date datetime NOT NULL,
+								    Form_Reference varchar(50) DEFAULT NULL,
+								    Company_id int NOT NULL,
+								    Is_Conflicted char(1) NOT NULL DEFAULT 'N',
+								    Reconcile_date datetime NOT NULL DEFAULT '1999-01-01 00:00:00',
+								    UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG),
+                                    				    UNIQUE KEY `Purchase_Accounting_PK` (`ID`),
+								    KEY `Form_Detail_Id_Key` (`Form_DETAIL_ID`),
+								    KEY `FORM_ID_KEY` (`FORM_ID`)
                                 );
 
 
@@ -903,18 +913,21 @@ insert into Purchase_Accounting(
 drop table if exists Adjustment_Accounting;
 create table Adjustment_Accounting(
                                        Id int Not Null primary key auto_increment,
-                                       Form_Id int,
-                                       Form_Detail_Id int,
-                                       Form_Flag Varchar(50),
-                                       GL_FLAG int,
-                                       Amount double,
-                                       GL_ACC_ID int,
-                                       Form_Date datetime,
-                                       Form_Reference varchar(50),
-                                       Company_id int,
-                                       Is_Conflicted char(1),
-                                       Reconcile_date datetime,
-				       UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
+                                       Form_Id int NOT NULL,
+                                       Form_Detail_Id int NULL,
+                                       Form_Flag Varchar(50) NOT NULL,
+                                       GL_FLAG int NOT NULL,
+                                       Amount decimal(22,2) NOT NULL,
+                                       GL_ACC_ID int NOT NULL,
+                                       Form_Date datetime NOT NULL,
+                                       Form_Reference varchar(50) DEFAULT NULL,
+                                       Company_id int NOT NULL,
+                                       Is_Conflicted char(1) NOT NULL DEFAULT 'N',
+                                       Reconcile_date datetime NOT NULL DEFAULT '1999-01-01 00:00:00',
+				       UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG),
+                                       UNIQUE KEY `Adjustment_Accounting_PK` (`ID`),
+				       KEY `Form_Detail_Id_Key` (`Form_DETAIL_ID`),
+				       KEY `FORM_ID_KEY` (`FORM_ID`)
                                  );
 
 /*Inventory Adjustment*/
@@ -987,19 +1000,23 @@ insert into Adjustment_Accounting(
 drop table if exists Payments_Accounting;
 create table Payments_Accounting(
                                      Id int Not Null primary key auto_increment,
-                                     Form_Id int,
-                                     Form_Detail_Id int,
-                                     Form_Flag Varchar(50),
-                                     GL_FLAG int,
-                                     Amount double,
-                                     GL_ACC_ID int,
-                                     Form_Date datetime,
-                                     Form_Reference varchar(50),
-                                     Company_id int,
-                                     Is_Conflicted char(1),
-                                     Reconcile_date datetime,
-				     UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG)
+                                     Form_Id int NOT NULL,
+                                     Form_Detail_Id int NULL,
+                                     Form_Flag Varchar(50) NOT NULL,
+                                     GL_FLAG int NOT NULL,
+                                     Amount decimal(22,2) NOT NULL,
+                                     GL_ACC_ID int NOT NULL,
+                                     Form_Date datetime NOT NULL,
+                                     Form_Reference varchar(50) DEFAULT NULL,
+                                     Company_id int NOT NULL,
+                                     Is_Conflicted char(1) NOT NULL DEFAULT 'N',
+                                     Reconcile_date  datetime NOT NULL DEFAULT '1999-01-01 00:00:00',
+				     UNIQUE KEY (FORM_ID,FORM_DETAIL_ID,GL_FLAG),
+                                     UNIQUE KEY `Payments_Accounting_PK` (`ID`),
+				     KEY `Form_Detail_Id_Key` (`Form_DETAIL_ID`),
+				     KEY `FORM_ID_KEY` (`FORM_ID`)
                                 );
+                             
 
 /*Receive Money*/
 insert into Payments_Accounting(
